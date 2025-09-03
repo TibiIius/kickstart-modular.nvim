@@ -11,11 +11,18 @@ return {
   },
   lazy = false,
   keys = {
-    { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
+    { '<leader>nt', ':Neotree reveal<CR>', desc = '[N]eo[T]ree', silent = true },
   },
   opts = {
     filesystem = {
+      follow_current_file = {
+        enabled = true,
+      },
+      filtered_items = {
+        visible = true,
+      },
       window = {
+        position = 'right',
         mappings = {
           ['\\'] = 'close_window',
         },
