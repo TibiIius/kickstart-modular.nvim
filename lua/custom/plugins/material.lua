@@ -28,7 +28,7 @@ return {
 
       plugins = { -- Uncomment the plugins that you use to highlight them
         -- Available plugins:
-        -- "blink",
+        'blink',
         -- "coc",
         -- "colorful-winsep",
         'dap',
@@ -42,7 +42,7 @@ return {
         -- "illuminate",
         -- "indent-blankline",
         -- "lspsaga",
-        -- "mini",
+        'mini',
         'neo-tree',
         -- "neogit",
         -- "neorg",
