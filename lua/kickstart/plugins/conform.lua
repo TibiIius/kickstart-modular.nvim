@@ -35,10 +35,16 @@ return {
         c = { 'clang_format' },
         h = { 'clang_format' },
         -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
+        python = { 'black', 'isort', stop_after_first = true },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascript = { 'biome', 'biome-organize-imports', 'prettierd', 'prettier', stop_after_first = true },
+        javascriptreact = { 'biome', 'biome-organize-imports', 'prettierd', 'prettier', stop_after_first = true },
+        typescript = { 'biome', 'biome-organize-imports', 'prettierd', 'prettier', stop_after_first = true },
+        typescriptreact = { 'biome', 'biome-organize-imports', 'prettierd', 'prettier', stop_after_first = true },
+        vue = { 'biome', 'biome-organize-imports', 'prettierd', 'prettier', stop_after_first = true },
+        json = { 'biome', 'biome-organize-imports', 'prettierd', 'prettier', stop_after_first = true },
+        jsonc = { 'biome', 'biome-organize-imports', 'prettierd', 'prettier', stop_after_first = true },
       },
       formatters = {
         clang_format = {
