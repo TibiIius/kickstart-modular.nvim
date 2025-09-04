@@ -68,4 +68,8 @@ vim.o.scrolloff = 10
 -- See `:help 'confirm'`
 vim.o.confirm = true
 
+-- Indent with spaces
+vim.o.shiftwidth = 2
+vim.o.smarttab = true
+
 -- vim: ts=2 sts=2 sw=2 et
