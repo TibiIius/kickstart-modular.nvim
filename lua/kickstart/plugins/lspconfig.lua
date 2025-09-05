@@ -224,6 +224,7 @@ return {
         biome = {},
         taplo = {}, -- toml lsp
         ansiblels = {},
+        jsonls = {},
         yamlls = {},
         lua_ls = {
           -- cmd = { ... },
@@ -257,6 +258,7 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'prettier',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

@@ -14,7 +14,7 @@ return {
         show_buffer_close_icons = true,
         show_close_icon = true,
         always_show_bufferline = true,
-        mode = 'buffers', -- set to "tabs" to only show tabpages instead
+        mode = 'tabs', -- set to "tabs" to only show tabpages instead
         style_preset = bufferline.style_preset.default, -- or bufferline.style_preset.minimal,
         themable = false, -- allows highlight groups to be overriden i.e. sets highlights as default
         numbers = 'none',

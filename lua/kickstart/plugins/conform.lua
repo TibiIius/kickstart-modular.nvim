@@ -43,8 +43,8 @@ return {
         typescript = { 'biome', 'biome-organize-imports', 'prettierd', 'prettier', stop_after_first = true },
         typescriptreact = { 'biome', 'biome-organize-imports', 'prettierd', 'prettier', stop_after_first = true },
         vue = { 'biome', 'biome-organize-imports', 'prettierd', 'prettier', stop_after_first = true },
-        json = { 'biome', 'biome-organize-imports', 'prettierd', 'prettier', stop_after_first = true },
-        jsonc = { 'biome', 'biome-organize-imports', 'prettierd', 'prettier', stop_after_first = true },
+        json = { 'prettierd', 'prettier', 'biome', 'biome-organize-imports', stop_after_first = true },
+        jsonc = { 'prettierd', 'prettier', 'biome', 'biome-organize-imports', stop_after_first = true },
       },
       formatters = {
         clang_format = {
