@@ -4,34 +4,33 @@ return {
   lazy = false,
   opts = {
     indent = {
-      scope = {
-        treesitter = {
-          enabled = true,
-        },
-      },
+      enabled = true,
     },
     terminal = { enabled = true },
     lazygit = { configure = true },
   },
 
   config = function()
-    local snacks = require 'snacks'
+    Snacks.indent.enable()
 
     vim.keymap.set('n', '<leader>l', function()
-      snacks.lazygit.open()
+      Snacks.lazygit.open()
     end, { desc = '[L]azyGit' })
 
     vim.keymap.set('n', '<leader>jn', function()
-      snacks.terminal.open()
+      Snacks.terminal.open()
     end, { desc = '[N]ew terminal' })
+
     vim.keymap.set('n', '<leader>jf', function()
-      snacks.terminal.open 'zsh'
+      Snacks.terminal.open 'zsh'
     end, { desc = '[F]loating terminal' })
+
     vim.keymap.set('n', '<leader>jt', function()
-      snacks.terminal.toggle()
+      Snacks.terminal.toggle()
     end, { desc = '[T]oggle terminal' })
+
     vim.keymap.set('n', '<leader>js', function()
-      snacks.terminal.list()
+      Snacks.terminal.list()
     end, { desc = '[S]elect open terminals' })
   end,
 }
