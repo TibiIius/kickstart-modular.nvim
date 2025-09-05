@@ -152,6 +152,11 @@ return {
             section = 'Actions',
           },
           {
+            name = 'Change Colorscheme',
+            action = ':Telescope colorscheme',
+            section = 'Actions',
+          },
+          {
             name = 'Lazy Update',
             action = ':Lazy update',
             section = 'Actions',
