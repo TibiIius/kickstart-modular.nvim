@@ -222,7 +222,9 @@ return {
         ts_ls = {},
         --
         biome = {},
-
+        taplo = {}, -- toml lsp
+        ansiblels = {},
+        yamlls = {},
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
