@@ -61,7 +61,10 @@ return {
       spec = {
         { '<leader>s', group = '[S]earch' },
         { '<leader>t', group = '[T]oggle' },
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { '<leader>h', group = 'Git', mode = { 'n', 'v' } },
+        { '<leader>n', group = 'NeoTree', },
+        { '<leader>j', group = 'Terminal', },
+        { '<leader>l', group = 'LSP', },
       },
     },
   },

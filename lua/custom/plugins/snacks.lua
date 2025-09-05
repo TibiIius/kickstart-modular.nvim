@@ -13,7 +13,7 @@ return {
   config = function()
     Snacks.indent.enable()
 
-    vim.keymap.set('n', '<leader>l', function()
+    vim.keymap.set('n', '<leader>gl', function()
       Snacks.lazygit.open()
     end, { desc = '[L]azyGit' })
 
