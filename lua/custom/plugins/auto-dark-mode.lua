@@ -9,7 +9,7 @@ return {
         require('material.functions').change_style 'lighter'
       end,
       update_interval = 100,
-      fallback = 'light',
+      fallback = 'dark',
     },
   },
 }
