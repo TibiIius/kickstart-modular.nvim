@@ -72,4 +72,8 @@ vim.o.confirm = true
 vim.o.shiftwidth = 2
 vim.o.smarttab = true
 
+-- For GUIs like Neovide
+vim.o.guifont = 'Liga SFMono Nerd Font:h11' -- text below applies for VimScript
+vim.opt.linespace = 3
+
 -- vim: ts=2 sts=2 sw=2 et
