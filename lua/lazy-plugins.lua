@@ -90,8 +90,4 @@ require('lazy').setup({
   },
 })
 
--- Set colorscheme here in case auto-dark-mode doesn't work
-vim.cmd.colorscheme 'material'
-require('material.functions').change_style 'darker'
-
 -- vim: ts=2 sts=2 sw=2 et
