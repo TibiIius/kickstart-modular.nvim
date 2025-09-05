@@ -3,22 +3,6 @@ return {
   priority = 1000,
   lazy = false,
   opts = {
-    scroll = {
-      animate = {
-        duration = { step = 15, total = 250 },
-        easing = 'linear',
-      },
-      -- faster animation when repeating scroll after delay
-      animate_repeat = {
-        delay = 100, -- delay in ms before using the repeat animation
-        duration = { step = 5, total = 50 },
-        easing = 'linear',
-      },
-      -- what buffers to animate
-      filter = function(buf)
-        return vim.g.snacks_scroll ~= false and vim.b[buf].snacks_scroll ~= false and vim.bo[buf].buftype ~= 'terminal'
-      end,
-    },
     indent = {
       scope = {
         treesitter = {
@@ -27,6 +11,27 @@ return {
       },
     },
     terminal = { enabled = true },
-    lazygit = { enabled = true },
+    lazygit = { configure = true },
   },
+
+  config = function()
+    local snacks = require 'snacks'
+
+    vim.keymap.set('n', '<leader>l', function()
+      snacks.lazygit.open()
+    end, { desc = '[L]azyGit' })
+
+    vim.keymap.set('n', '<leader>jn', function()
+      snacks.terminal.open()
+    end, { desc = '[N]ew terminal' })
+    vim.keymap.set('n', '<leader>jf', function()
+      snacks.terminal.open 'zsh'
+    end, { desc = '[F]loating terminal' })
+    vim.keymap.set('n', '<leader>jt', function()
+      snacks.terminal.toggle()
+    end, { desc = '[T]oggle terminal' })
+    vim.keymap.set('n', '<leader>js', function()
+      snacks.terminal.list()
+    end, { desc = '[S]elect open terminals' })
+  end,
 }
