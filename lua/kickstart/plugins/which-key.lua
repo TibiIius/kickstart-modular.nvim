@@ -65,6 +65,7 @@ return {
         { '<leader>n', group = 'NeoTree' },
         { '<leader>j', group = 'Terminal' },
         { '<leader>l', group = 'LSP' },
+        { '<leader>d', group = 'DAP' },
       },
     },
   },
