@@ -1,6 +1,9 @@
 return {
   { -- Autoformat
     'stevearc/conform.nvim',
+    dependencies = {
+      'mason-org/mason.nvim',
+    },
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
     keys = {
@@ -53,6 +56,14 @@ return {
         },
       },
     },
+  },
+  {
+    'zapling/mason-conform.nvim',
+    dependencies = {
+      'mason-org/mason.nvim',
+      'stevearc/conform.nvim',
+    },
+    config = true,
   },
 }
 -- vim: ts=2 sts=2 sw=2 et
