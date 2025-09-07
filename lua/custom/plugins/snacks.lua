@@ -6,6 +6,8 @@ return {
     indent = {
       enabled = true,
     },
+    picker = { enabled = true },
+    explorer = { enabled = true },
     terminal = { enabled = true },
     lazygit = { configure = true },
   },
@@ -32,5 +34,21 @@ return {
     vim.keymap.set('n', '<leader>js', function()
       Snacks.terminal.list()
     end, { desc = '[S]elect open terminals' })
+
+    vim.keymap.set('n', '<leader>bo', function()
+      Snacks.explorer.open {
+        layout = {
+          layout = { position = 'right' },
+        },
+      }
+    end, { desc = '[O]pen File [B]rowser' })
+
+    vim.keymap.set('n', '<leader>br', function()
+      Snacks.explorer.open {
+        layout = {
+          layout = { position = 'right' },
+        },
+      }
+    end, { desc = '[R]eveal in File [B]rowser' })
   end,
 }

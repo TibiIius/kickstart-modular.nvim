@@ -1,6 +1,9 @@
 return {
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
+    dependencies = {
+      'folke/snacks.nvim', -- Project picker
+    },
     config = function()
       -- Better Around/Inside textobjects
       --
@@ -134,6 +137,7 @@ return {
       }
 
       local mstarter = require 'mini.starter'
+      local snacks = require 'snacks'
 
       mstarter.setup {
         evaluate_single = false,
@@ -141,13 +145,16 @@ return {
         footer = 'すみません、日本語がわかりません。',
         items = {
           {
+            name = 'Recent Projects',
+            action = function()
+              snacks.picker.projects()
+            end,
+            section = 'Actions',
+          },
+          {
             name = 'Open Folder',
             action = function()
-              require('telescope').extensions.opener.opener {
-                hidden = true,
-                respect_gitignore = false,
-                root_dir = '~',
-              }
+              snacks.picker.zoxide()
             end,
             section = 'Actions',
           },
