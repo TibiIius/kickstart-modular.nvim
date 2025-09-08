@@ -9,16 +9,24 @@ return {
     picker = { enabled = true },
     explorer = { enabled = true },
     terminal = { enabled = true },
-    lazygit = { configure = true },
+    lazygit = { enabled = true },
+    zen = {
+      enabled = true,
+    },
   },
 
   config = function()
+    Snacks.setup()
+
+    -- Indent
     Snacks.indent.enable()
 
+    -- LazyGit
     vim.keymap.set('n', '<leader>gl', function()
       Snacks.lazygit.open()
     end, { desc = '[L]azyGit' })
 
+    -- Terminal
     vim.keymap.set('n', '<leader>jn', function()
       Snacks.terminal.open()
     end, { desc = '[N]ew terminal' })
@@ -35,6 +43,7 @@ return {
       Snacks.terminal.list()
     end, { desc = '[S]elect open terminals' })
 
+    -- Explorer
     vim.keymap.set('n', '<leader>bo', function()
       Snacks.explorer.open {
         layout = {
@@ -50,5 +59,25 @@ return {
         },
       }
     end, { desc = '[R]eveal in File [B]rowser' })
+
+    -- Zen
+    vim.keymap.set('n', '<leader>z', function()
+      Snacks.zen {
+
+      }
+    end, { desc = '[Z]en' })
+
+    vim.keymap.set('n', '<leader>Z', function()
+      Snacks.zen.zoom {
+	zoom = {
+      	  toggles = {},
+      	  show = { statusline = false, tabline = false },
+      	  win = {
+      	    backdrop = true,
+      	    width = 0, -- full width
+      	  },
+      	},
+      }
+    end, { desc = '[Z]en [Z]oom' })
   end,
 }
