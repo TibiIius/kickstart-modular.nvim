@@ -1,6 +1,6 @@
 return {
-  'folke/snacks.nvim',
-  branch = 'main',
+  'TibiIius/snacks.nvim',
+  branch = 'fix/add-new-terminals-to-table',
   priority = 1000,
   lazy = false,
   config = function()
@@ -59,19 +59,26 @@ return {
     end, { desc = '[T]oggle terminal' })
 
     vim.keymap.set('n', '<leader>js', function()
-      local terms = Snacks.terminal.list()
+      local snacks = require 'snacks'
+      local sterms = snacks.terminal.list()
+      local terms = {}
+
+      for k, v in pairs(sterms) do
+        terms[k] = k
+      end
 
       if #terms == 0 then
         vim.notify('No open terminals', vim.log.levels.WARN)
         return
       end
+
       Snacks.picker.select(terms, {
         prompt = 'Select terminal:',
         format_item = function(item)
-          return string.format('Terminal (id: %d)', item.id)
+          return string.format('Terminal (id: %d)', item)
         end,
       }, function(item)
-        Snacks.terminal.get(item.id)
+        sterms[item]:toggle()
       end)
     end, { desc = '[S]elect open terminals' })
 
