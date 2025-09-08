@@ -103,7 +103,7 @@ return {
           rm = colors.cyan,
           ['r?'] = colors.cyan,
           ['!'] = colors.red,
-          t = colors.red,
+          t = colors.green,
         }
         return { fg = mode_color[vim.fn.mode()] }
       end,
