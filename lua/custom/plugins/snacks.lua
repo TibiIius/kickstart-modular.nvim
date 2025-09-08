@@ -24,6 +24,7 @@ return {
       },
       terminal = {
         enabled = true,
+        auto_close = true,
       },
       lazygit = {
         enabled = true,
@@ -38,6 +39,9 @@ return {
           width = 0, -- full width
         },
       },
+      win = {
+        enabled = true,
+      },
     }
 
     -- LazyGit
@@ -46,8 +50,15 @@ return {
     end, { desc = '[L]azyGit' })
 
     -- Terminal
+    local newtermopts = {
+      auto_close = true,
+      win = {
+        width = 0.25,
+        position = 'left',
+      },
+    }
     vim.keymap.set('n', '<leader>jn', function()
-      Snacks.terminal.open()
+      Snacks.terminal.open(nil, newtermopts)
     end, { desc = '[N]ew terminal' })
 
     vim.keymap.set('n', '<leader>jf', function()
@@ -55,7 +66,7 @@ return {
     end, { desc = '[F]loating terminal' })
 
     vim.keymap.set('n', '<leader>jt', function()
-      Snacks.terminal.toggle()
+      Snacks.terminal.toggle(nil, newtermopts)
     end, { desc = '[T]oggle terminal' })
 
     vim.keymap.set('n', '<leader>js', function()
