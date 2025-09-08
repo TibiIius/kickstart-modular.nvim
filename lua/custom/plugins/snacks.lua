@@ -1,25 +1,44 @@
 return {
   'folke/snacks.nvim',
+  branch = 'main',
   priority = 1000,
   lazy = false,
-  opts = {
-    indent = {
-      enabled = true,
-    },
-    picker = { enabled = true },
-    explorer = { enabled = true },
-    terminal = { enabled = true },
-    lazygit = { enabled = true },
-    zen = {
-      enabled = true,
-    },
-  },
-
   config = function()
-    Snacks.setup()
-
-    -- Indent
-    Snacks.indent.enable()
+    Snacks.setup {
+      indent = {
+        enabled = true,
+      },
+      picker = {
+        sources = {
+          explorer = {
+            hidden = true,
+            ignored = true,
+            layout = {
+              layout = { position = 'right' },
+            },
+          },
+        },
+      },
+      explorer = {
+        enabled = true,
+      },
+      terminal = {
+        enabled = true,
+      },
+      lazygit = {
+        enabled = true,
+      },
+      zen = {
+        enabled = true,
+      },
+      zoom = {
+        show = { statusline = false, tabline = false },
+        win = {
+          backdrop = true,
+          width = 0, -- full width
+        },
+      },
+    }
 
     -- LazyGit
     vim.keymap.set('n', '<leader>gl', function()
@@ -40,44 +59,38 @@ return {
     end, { desc = '[T]oggle terminal' })
 
     vim.keymap.set('n', '<leader>js', function()
-      Snacks.terminal.list()
+      local terms = Snacks.terminal.list()
+
+      if #terms == 0 then
+        vim.notify('No open terminals', vim.log.levels.WARN)
+        return
+      end
+      Snacks.picker.select(terms, {
+        prompt = 'Select terminal:',
+        format_item = function(item)
+          return string.format('Terminal (id: %d)', item.id)
+        end,
+      }, function(item)
+        Snacks.terminal.get(item.id)
+      end)
     end, { desc = '[S]elect open terminals' })
 
     -- Explorer
     vim.keymap.set('n', '<leader>bo', function()
-      Snacks.explorer.open {
-        layout = {
-          layout = { position = 'right' },
-        },
-      }
+      Snacks.explorer.open()
     end, { desc = '[O]pen File [B]rowser' })
 
     vim.keymap.set('n', '<leader>br', function()
-      Snacks.explorer.open {
-        layout = {
-          layout = { position = 'right' },
-        },
-      }
+      Snacks.explorer.reveal()
     end, { desc = '[R]eveal in File [B]rowser' })
 
     -- Zen
     vim.keymap.set('n', '<leader>z', function()
-      Snacks.zen {
-
-      }
+      Snacks.zen()
     end, { desc = '[Z]en' })
 
     vim.keymap.set('n', '<leader>Z', function()
-      Snacks.zen.zoom {
-	zoom = {
-      	  toggles = {},
-      	  show = { statusline = false, tabline = false },
-      	  win = {
-      	    backdrop = true,
-      	    width = 0, -- full width
-      	  },
-      	},
-      }
+      Snacks.zen.zoom()
     end, { desc = '[Z]en [Z]oom' })
   end,
 }
