@@ -11,11 +11,12 @@ return {
       require('dap.ext.vscode').json_decode = require'json5'.parse
 
       vim.keymap.set('n', '<leader>dt', dap.terminate, { desc = '[D]AP [T]erminate' })
+      vim.keymap.set('n', '<leader>dr', dap.restart, { desc = '[D]AP [R]estart' })
       vim.keymap.set('n', '<leader>dn', ':DapNew<CR>', { desc = '[D]AP [N]ew' })
       vim.keymap.set('n', '<leader>dso', ':DapStepOver<CR>', { desc = '[D]AP [S]tep [O]ver' })
-      vim.keymap.set('n', '<leader>dso', ':DapStepOut<CR>', { desc = '[D]AP [S]tep O[u]t' })
+      vim.keymap.set('n', '<leader>dsu', ':DapStepOut<CR>', { desc = '[D]AP [S]tep O[u]t' })
       vim.keymap.set('n', '<leader>dsi', ':DapStepInto<CR>', { desc = '[D]AP [S]tep [I]nto' })
-      vim.keymap.set('n', '<leader>dc', ':DapStepInto<CR>', { desc = '[D]AP [C]ontinue' })
+      vim.keymap.set('n', '<leader>dc', ':DapContinue<CR>', { desc = '[D]AP [C]ontinue' })
       vim.keymap.set('n', '<leader>db', ':DapToggleBreakpoint<CR>', { desc = '[D]AP Toggle [B]reakpoint' })
       vim.keymap.set('n', '<leader>dB', ':DapClearBreakpoints<CR>', { desc = '[D]AP Clear [B]reakpoints' })
 
@@ -45,7 +46,7 @@ return {
 
       dapui.setup()
 
-      vim.keymap.set('n', '<leader>dr', dapui.toggle, { desc = '[D]AP [R]eveal' })
+      vim.keymap.set('n', '<leader>td', dapui.toggle, { desc = '[T]oggle [D]AP' })
 
       dap.listeners.after.event_initialized['dapui_config'] = function()
         dapui.open()
