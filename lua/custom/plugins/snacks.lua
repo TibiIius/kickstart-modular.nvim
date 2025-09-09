@@ -4,10 +4,140 @@ return {
   priority = 1000,
   lazy = false,
   dependencies = { 'folke/noice.nvim' },
+  keys = {
+    -- Zen
+    {
+      '<leader>z',
+      function()
+        Snacks.zen()
+      end,
+      desc = 'Toggle Zen Mode',
+    },
+    {
+      '<leader>Z',
+      function()
+        Snacks.zen.zoom()
+      end,
+      desc = 'Toggle Zen Mode',
+    },
+
+    -- Terminal
+    {
+      '<leader>js',
+      function()
+        local snacks = require 'snacks'
+        local sterms = snacks.terminal.list()
+        local terms = {}
+
+        for k, v in pairs(sterms) do
+          terms[k] = k
+        end
+
+        if #terms == 0 then
+          vim.notify('No open terminals', vim.log.levels.WARN)
+          return
+        end
+
+        Snacks.picker.select(terms, {
+          prompt = 'Select terminal:',
+          format_item = function(item)
+            return string.format('Terminal (id: %d)', item)
+          end,
+        }, function(item)
+          sterms[item]:toggle()
+        end)
+      end,
+      desc = '[S]elect open terminals',
+    },
+    {
+      '<leader>jn',
+      function()
+        Snacks.terminal.open()
+      end,
+      desc = '[N]ew terminal',
+    },
+    {
+      '<leader>jf',
+      function()
+        Snacks.terminal.open(nil, { win = { position = 'float' } })
+      end,
+      desc = '[F]loating terminal',
+    },
+    {
+      '<leader>jt',
+      function()
+        Snacks.terminal.toggle()
+      end,
+      desc = '[T]oggle terminal',
+    },
+    -- LazyGit
+    {
+      '<leader>gl',
+      function()
+        Snacks.lazygit.open()
+      end,
+      desc = '[L]azyGit',
+    },
+
+    -- Explorer
+    {
+      '<leader>eo',
+      function()
+        Snacks.explorer.open()
+      end,
+      desc = '[E]xplorer [O]pen',
+    },
+    {
+      '<leader>er',
+      function()
+        Snacks.explorer.reveal()
+      end,
+      desc = '[E]xplorer [R]eveal',
+    },
+
+    -- Zen
+    {
+      '<leader>z',
+      function()
+        Snacks.zen()
+      end,
+      desc = '[Z]en',
+    },
+
+    {
+      '<leader>Z',
+      function()
+        Snacks.zen.zoom()
+      end,
+      desc = '[Z]en [Z]oom',
+    },
+  },
+  ---@type snacks.Config
   opts = {
+    ---@type table<string, snacks.win.Config>
+    styles = {
+      zen = {
+        enter = true,
+        fixbuf = false,
+        minimal = false,
+        width = 240,
+        height = 0,
+        backdrop = { transparent = true, blend = 40 },
+        keys = { q = false },
+        zindex = 40,
+        wo = {
+          winhighlight = 'NormalFloat:Normal',
+        },
+        w = {
+          snacks_main = true,
+        },
+      },
+    },
+    ---@type snacks.indent.Config
     indent = {
       enabled = true,
     },
+    ---@type snacks.picker.Config
     picker = {
       sources = {
         explorer = {
@@ -19,29 +149,52 @@ return {
         },
       },
     },
+    ---@type snacks.explorer.Config
     explorer = {
       enabled = true,
     },
+    ---@type snacks.terminal.Config
     terminal = {
       enabled = true,
       auto_close = true,
-    },
-    lazygit = {
-      enabled = true,
-    },
-    zen = {
-      enabled = true,
-    },
-    zoom = {
-      show = { statusline = false, tabline = false },
       win = {
-        backdrop = true,
-        width = 0, -- full width
+        width = 0.25,
+        position = 'left',
       },
     },
+    ---@type snacks.lazygit.Config
+    lazygit = {
+      enabled = true,
+      win = {
+        position = 'float',
+      },
+    },
+    ---@type snacks.zen.Config
+    zen = {
+      enabled = true,
+      toggles = {
+        dim = true,
+        indent = false,
+        git_signs = false,
+        diagnostics = false,
+        line_number = false,
+        relative_number = false,
+        signcolumn = 'no',
+      },
+      show = { statusline = false, tabline = false },
+      zoom = {
+        show = { statusline = false, tabline = false },
+        win = {
+          backdrop = true,
+          width = 0, -- full width
+        },
+      },
+    },
+    ---@type snacks.win.Config
     win = {
       enabled = true,
     },
+    ---@type snacks.notifier.Config
     notifier = {
       enabled = true,
     },
@@ -97,72 +250,5 @@ return {
         })
       end,
     })
-
-    -- LazyGit
-    vim.keymap.set('n', '<leader>gl', function()
-      Snacks.lazygit.open()
-    end, { desc = '[L]azyGit' })
-
-    -- Terminal
-    local newtermopts = {
-      auto_close = true,
-      win = {
-        width = 0.25,
-        position = 'left',
-      },
-    }
-    vim.keymap.set('n', '<leader>jn', function()
-      Snacks.terminal.open(nil, newtermopts)
-    end, { desc = '[N]ew terminal' })
-
-    vim.keymap.set('n', '<leader>jf', function()
-      Snacks.terminal.open 'zsh'
-    end, { desc = '[F]loating terminal' })
-
-    vim.keymap.set('n', '<leader>jt', function()
-      Snacks.terminal.toggle(nil, newtermopts)
-    end, { desc = '[T]oggle terminal' })
-
-    vim.keymap.set('n', '<leader>js', function()
-      local snacks = require 'snacks'
-      local sterms = snacks.terminal.list()
-      local terms = {}
-
-      for k, v in pairs(sterms) do
-        terms[k] = k
-      end
-
-      if #terms == 0 then
-        vim.notify('No open terminals', vim.log.levels.WARN)
-        return
-      end
-
-      Snacks.picker.select(terms, {
-        prompt = 'Select terminal:',
-        format_item = function(item)
-          return string.format('Terminal (id: %d)', item)
-        end,
-      }, function(item)
-        sterms[item]:toggle()
-      end)
-    end, { desc = '[S]elect open terminals' })
-
-    -- Explorer
-    vim.keymap.set('n', '<leader>bo', function()
-      Snacks.explorer.open()
-    end, { desc = '[O]pen File [B]rowser' })
-
-    vim.keymap.set('n', '<leader>br', function()
-      Snacks.explorer.reveal()
-    end, { desc = '[R]eveal in File [B]rowser' })
-
-    -- Zen
-    vim.keymap.set('n', '<leader>z', function()
-      Snacks.zen()
-    end, { desc = '[Z]en' })
-
-    vim.keymap.set('n', '<leader>Z', function()
-      Snacks.zen.zoom()
-    end, { desc = '[Z]en [Z]oom' })
   end,
 }
