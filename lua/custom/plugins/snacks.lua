@@ -5,6 +5,154 @@ return {
   lazy = false,
   dependencies = { 'folke/noice.nvim' },
   keys = {
+    -- Picker
+    {
+      '<leader><leader>',
+      function()
+        Snacks.picker.buffers()
+      end,
+      desc = 'Open buffers',
+    },
+    {
+      '<leader>sf',
+      function()
+        Snacks.picker.smart()
+      end,
+      desc = '[S]search [F]file (picker.smart)',
+    },
+    {
+      '<leader>sg',
+      function()
+        Snacks.picker.grep()
+      end,
+      desc = '[S]earch by [G]rep (picker.grep)',
+    },
+    {
+      '<leader>gel',
+      function()
+        Snacks.picker.git_log()
+      end,
+      desc = '[G]it [E]xplore [L]og',
+    },
+    {
+      '<leader>geb',
+      function()
+        Snacks.picker.git_branches()
+      end,
+      desc = '[G]it [E]xplore [B]ranches',
+    },
+    {
+      '<leader>ged',
+      function()
+        Snacks.picker.git_diff()
+      end,
+      desc = '[G]it [E]xplore [B]ranches',
+    },
+    {
+      '<leader>ged',
+      function()
+        Snacks.picker.git_diff()
+      end,
+      desc = '[G]it [E]xplore [B]ranches',
+    },
+    {
+      '<leader>Nc',
+      function()
+        Snacks.picker.commands()
+      end,
+      desc = '[N]eovim [C]ommands',
+    },
+    {
+      '<leader>NC',
+      function()
+        Snacks.picker.colorschemes()
+      end,
+      desc = '[N]eovim [C]colorschemes',
+    },
+    {
+      '<leader>Nh',
+      function()
+        Snacks.picker.help()
+      end,
+      desc = '[N]eovim [H]elp',
+    },
+    {
+      '<leader>Nk',
+      function()
+        Snacks.picker.keymaps()
+      end,
+      desc = '[N]eovim [K]eymaps',
+    },
+    {
+      '<leader>/',
+      function()
+        Snacks.picker.grep {
+          sources = {
+            buffers = { current = true },
+          },
+        }
+      end,
+      desc = 'Search in current buffer',
+    },
+    {
+      '<leader>s/',
+      function()
+        Snacks.picker.grep {
+          buffers = true,
+        }
+      end,
+      desc = '[S]earch in open buffers',
+    },
+    {
+      '<leader>sld',
+      function()
+        Snacks.picker.diagnostics()
+      end,
+      desc = '[S]earch [L]SP [D]iagnostics',
+    },
+    {
+      '<leader>slr',
+      function()
+        Snacks.picker.lsp_references()
+      end,
+      desc = '[S]earch [L]SP [R]eferences',
+    },
+    {
+      '<leader>sli',
+      function()
+        Snacks.picker.lsp_implementations()
+      end,
+      desc = '[S]earch [L]SP [I]mplementations',
+    },
+    {
+      '<leader>sld',
+      function()
+        Snacks.picker.lsp_definitions()
+      end,
+      desc = '[S]earch [L]SP [D]efinitions',
+    },
+    {
+      '<leader>sls',
+      function()
+        Snacks.picker.lsp_symbols()
+      end,
+      desc = '[S]earch [L]SP [S]ymbols',
+    },
+    {
+      '<leader>slS',
+      function()
+        Snacks.picker.lsp_workspace_symbols()
+      end,
+      desc = '[S]earch [L]SP Workspace [S]ymbols',
+    },
+    {
+      '<leader>slt',
+      function()
+        Snacks.picker.lsp_type_definitions()
+      end,
+      desc = '[S]earch [L]SP [T]ype Definitions',
+    },
+
     -- Zen
     {
       '<leader>z',

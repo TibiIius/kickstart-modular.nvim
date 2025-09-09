@@ -4,23 +4,24 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim', -- For standard functions
     'MunifTanjim/nui.nvim', -- To build the plugin UI
-    'nvim-telescope/telescope.nvim', -- For picking b/w different remote methods
+    -- 'nvim-telescope/telescope.nvim', -- For picking b/w different remote methods
   },
-  config = function()
-    require('remote-nvim').setup {
-      client_callback = function(port, workspace_config)
-        local cmd = ('wezterm cli set-tab-title --pane-id $(wezterm cli spawn nvim --server localhost:%s --remote-ui) %s'):format(
-          port,
-          ("'Remote: %s'"):format(workspace_config.host)
-        )
-        vim.fn.jobstart(cmd, {
-          detach = true,
-          on_exit = function(job_id, exit_code, event_type)
-            -- This function will be called when the job exits
-            print('Client', job_id, 'exited with code', exit_code, 'Event type:', event_type)
-          end,
-        })
-      end,
-    }
+  opts = {
+    client_callback = function(port, workspace_config)
+      local cmd = ('wezterm cli set-tab-title --pane-id $(wezterm cli spawn nvim --server localhost:%s --remote-ui) %s'):format(
+        port,
+        ("'Remote: %s'"):format(workspace_config.host)
+      )
+      vim.fn.jobstart(cmd, {
+        detach = true,
+        on_exit = function(job_id, exit_code, event_type)
+          -- This function will be called when the job exits
+          print('Client', job_id, 'exited with code', exit_code, 'Event type:', event_type)
+        end,
+      })
+    end,
+  },
+  config = function(_, opts)
+    require('remote-nvim').setup(opts)
   end,
 }
