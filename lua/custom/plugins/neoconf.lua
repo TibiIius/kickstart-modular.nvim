@@ -1,1 +1,4 @@
-return { 'folke/neoconf.nvim', priority = 950, lazy = false, config = true }
+return {
+  'folke/neoconf.nvim',
+  branch = 'main',
+}
