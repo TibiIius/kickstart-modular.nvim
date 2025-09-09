@@ -76,4 +76,13 @@ vim.o.smarttab = true
 vim.o.guifont = 'Liga SFMono Nerd Font:h11' -- text below applies for VimScript
 vim.opt.linespace = 3
 
+-- More filetypes vim doesn't know about
+vim.filetype.add {
+  extension = {
+    jinja = 'jinja',
+    jinja2 = 'jinja',
+    j2 = 'jinja',
+  },
+}
+
 -- vim: ts=2 sts=2 sw=2 et

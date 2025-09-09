@@ -240,6 +240,9 @@ return {
             },
           },
         },
+        jinja_lsp = {
+          filetypes = { 'jinja' }
+        }
       }
 
       -- Ensure the servers and tools above are installed

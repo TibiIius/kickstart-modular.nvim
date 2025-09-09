@@ -48,6 +48,7 @@ return {
         vue = { 'biome', 'biome-organize-imports', 'prettierd', 'prettier', stop_after_first = true },
         json = { 'prettierd', 'prettier', 'biome', 'biome-organize-imports', stop_after_first = true },
         jsonc = { 'prettierd', 'prettier', 'biome', 'biome-organize-imports', stop_after_first = true },
+        jinja = { 'djlint', stop_after_first = true },
       },
       formatters = {
         clang_format = {
