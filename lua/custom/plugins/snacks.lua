@@ -287,6 +287,31 @@ return {
     },
     ---@type snacks.picker.Config
     picker = {
+      layout = {
+        layout = {
+          -- Reverse dropdown
+          backdrop = false,
+          row = 1,
+          width = 0.4,
+          min_width = 80,
+          height = 0.8,
+          border = 'none',
+          box = 'vertical',
+          {
+            box = 'vertical',
+            border = 'rounded',
+            title = '{title} {live} {flags}',
+            title_pos = 'center',
+            { win = 'input', height = 1, border = 'bottom' },
+            { win = 'list', border = 'none' },
+          },
+          { win = 'preview', title = '{preview}', height = 0.4, border = 'rounded' },
+        },
+      },
+      matcher = {
+        frecency = true, -- frecency bonus
+        history_bonus = true, -- give more weight to chronological order
+      },
       sources = {
         explorer = {
           hidden = true,
