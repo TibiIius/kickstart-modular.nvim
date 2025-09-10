@@ -1,6 +1,6 @@
 return {
   'TibiIius/snacks.nvim',
-  branch = 'fix/add-new-terminals-to-table',
+  branch = 'main',
   priority = 1000,
   lazy = false,
   dependencies = { 'folke/noice.nvim' },
@@ -170,20 +170,20 @@ return {
       function()
         local snacks = require 'snacks'
         local sterms = snacks.terminal.list()
-        local terms = {}
 
-        for k, v in pairs(sterms) do
-          terms[k] = k
-        end
-
-        if #terms == 0 then
+        if #sterms == 0 then
           vim.notify('No open terminals', vim.log.levels.WARN)
           return
         end
 
+        local terms = {}
+
+        for k, _ in pairs(sterms) do
+          terms[k] = k
+        end
+
         Snacks.picker.select(terms, {
-          prompt = 'Select terminal:',
-          kind = 'snacks_terminal',
+          prompt = 'Select terminal',
           format_item = function(item)
             return string.format('Terminal %d', item)
           end,
@@ -197,16 +197,30 @@ return {
       desc = '[S]elect open terminals',
     },
     {
-      '<leader>jn',
+      '<c-,>',
       function()
-        Snacks.terminal.open()
+        -- Figure out new ID
+        -- TODO: Change this accordingly if the ID change ever hits main
+        local id = #Snacks.terminal.list() + 1
+
+        Snacks.terminal.open(nil, {
+          env = {
+            id = tostring(id),
+          },
+        })
       end,
-      desc = '[N]ew terminal',
+      desc = 'Create new terminal',
+      mode = { 't', 'n' },
     },
     {
       '<leader>jf',
       function()
-        Snacks.terminal.open(nil, { win = { position = 'float' } })
+        Snacks.terminal.open(nil, {
+          win = {
+            position = 'float',
+          },
+          auto_close = true,
+        })
       end,
       desc = '[F]loating terminal',
     },
@@ -218,10 +232,15 @@ return {
       desc = '[T]oggle terminal',
     },
     {
-      '<leader>jj',
+      '<c-;>',
       function()
         local has_visible = false
         local terms = Snacks.terminal.list()
+
+        if #terms == 0 then
+          Snacks.terminal.open()
+          return
+        end
 
         for _, term in pairs(terms) do
           if term:win_valid() then
@@ -241,6 +260,7 @@ return {
         end
       end,
       desc = 'Toggle all terminals',
+      mode = { 'n', 't' },
     },
 
     -- LazyGit
@@ -270,18 +290,17 @@ return {
 
     -- Zen
     {
-      '<leader>z',
+      '<c-b>',
       function()
         Snacks.zen()
       end,
       desc = '[Z]en',
     },
     {
-      '<leader>Z',
+      '<c-s-b>',
       function()
         Snacks.zen.zoom()
       end,
-      desc = '[Z]en [Z]oom',
     },
 
     -- Scratch
