@@ -361,6 +361,13 @@ return {
           },
         },
       },
+      win = {
+        input = {
+          keys = {
+            ['<c-n>'] = { 'toggle_live', mode = { 'i', 'n' } },
+          },
+        },
+      },
     },
     ---@type snacks.explorer.Config
     explorer = {
