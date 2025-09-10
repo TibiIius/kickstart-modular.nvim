@@ -16,16 +16,20 @@ return {
     {
       '<leader>sf',
       function()
-        Snacks.picker.smart()
+        Snacks.picker.smart {
+          filter = {
+            cwd = true,
+          },
+        }
       end,
-      desc = '[S]search [F]file (picker.smart)',
+      desc = '[S]earch [F]iles',
     },
     {
       '<leader>sg',
       function()
         Snacks.picker.grep()
       end,
-      desc = '[S]earch by [G]rep (picker.grep)',
+      desc = '[S]earch by [G]rep',
     },
     {
       '<leader>gel',
@@ -46,7 +50,7 @@ return {
       function()
         Snacks.picker.git_diff()
       end,
-      desc = '[G]it [E]xplore [B]ranches',
+      desc = '[G]it [E]xplore [D]iff',
     },
     {
       '<leader>ged',
@@ -152,21 +156,12 @@ return {
       end,
       desc = '[S]earch [L]SP [T]ype Definitions',
     },
-
-    -- Zen
     {
-      '<leader>z',
+      '<leader>q',
       function()
-        Snacks.zen()
+        Snacks.picker.qflist()
       end,
-      desc = 'Toggle Zen Mode',
-    },
-    {
-      '<leader>Z',
-      function()
-        Snacks.zen.zoom()
-      end,
-      desc = 'Toggle Zen Mode',
+      desc = '[Q]uickfixes',
     },
 
     -- Terminal
@@ -188,10 +183,14 @@ return {
 
         Snacks.picker.select(terms, {
           prompt = 'Select terminal:',
+          kind = 'snacks_terminal',
           format_item = function(item)
-            return string.format('Terminal (id: %d)', item)
+            return string.format('Terminal %d', item)
           end,
         }, function(item)
+          if item == nil then
+            return
+          end
           sterms[item]:toggle()
         end)
       end,
@@ -218,6 +217,32 @@ return {
       end,
       desc = '[T]oggle terminal',
     },
+    {
+      '<leader>jT',
+      function()
+        local has_visible = false
+        local terms = Snacks.terminal.list()
+
+        for _, term in pairs(terms) do
+          if term:win_valid() then
+            has_visible = true
+            break
+          end
+        end
+
+        if has_visible then
+          for _, term in pairs(terms) do
+            term:hide()
+          end
+        else
+          for _, term in pairs(terms) do
+            term:show()
+          end
+        end
+      end,
+      desc = '[T]oggle all terminals',
+    },
+
     -- LazyGit
     {
       '<leader>gl',
@@ -251,13 +276,28 @@ return {
       end,
       desc = '[Z]en',
     },
-
     {
       '<leader>Z',
       function()
         Snacks.zen.zoom()
       end,
       desc = '[Z]en [Z]oom',
+    },
+
+    -- Scratch
+    {
+      '<leader>So',
+      function()
+        Snacks.scratch()
+      end,
+      desc = '[S]cratch [O]pen',
+    },
+    {
+      '<leader>Ss',
+      function()
+        Snacks.scratch.select()
+      end,
+      desc = '[S]cratch [S]elect',
     },
   },
   ---@type snacks.Config
@@ -331,7 +371,6 @@ return {
       enabled = true,
       auto_close = true,
       win = {
-        width = 0.25,
         position = 'left',
       },
     },
