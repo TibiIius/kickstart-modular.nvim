@@ -183,6 +183,9 @@ return {
           mstarter.gen_hook.aligning('center', 'center'),
         },
       }
+
+      -- comment
+      require('mini.comment').setup()
     end,
   },
 }
