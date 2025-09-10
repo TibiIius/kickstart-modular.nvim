@@ -7,6 +7,13 @@ return {
   keys = {
     -- Picker
     {
+      '<leader>hu',
+      function()
+        Snacks.picker.undo()
+      end,
+      desc = '[H]istory [U]ndo',
+    },
+    {
       '<leader><leader>',
       function()
         Snacks.picker.buffers()
@@ -199,14 +206,9 @@ return {
     {
       '<c-,>',
       function()
-        -- Figure out new ID
-        -- TODO: Change this accordingly if the ID change ever hits main
-        local id = #Snacks.terminal.list() + 1
-
         Snacks.terminal.open(nil, {
-          env = {
-            id = tostring(id),
-          },
+          -- TODO: Change this accordingly if the ID change ever hits main
+          id = tostring(#Snacks.terminal.list() + 1),
         })
       end,
       desc = 'Create new terminal',
@@ -216,6 +218,7 @@ return {
       '<leader>jf',
       function()
         Snacks.terminal.open(nil, {
+          id = tostring(#Snacks.terminal.list() + 1),
           win = {
             position = 'float',
           },
@@ -443,6 +446,20 @@ return {
     -- HACK: restore vim.notify after snacks setup and let noice.nvim take over
     -- this is needed to have early notifications show up in noice history
     vim.notify = notify
+
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'VeryLazy',
+      callback = function()
+        -- Setup some globals for debugging (lazy-loaded)
+        _G.dd = function(...)
+          Snacks.debug.inspect(...)
+        end
+        _G.bt = function()
+          Snacks.debug.backtrace()
+        end
+        vim.print = _G.dd -- Override print to use snacks for `:=` command
+      end,
+    })
 
     -- Notifier
     -- From snacks examples
