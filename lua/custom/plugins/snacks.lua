@@ -218,7 +218,7 @@ return {
       desc = '[T]oggle terminal',
     },
     {
-      '<leader>jT',
+      '<leader>jj',
       function()
         local has_visible = false
         local terms = Snacks.terminal.list()
@@ -240,7 +240,7 @@ return {
           end
         end
       end,
-      desc = '[T]oggle all terminals',
+      desc = 'Toggle all terminals',
     },
 
     -- LazyGit
