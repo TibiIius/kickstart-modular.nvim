@@ -349,6 +349,7 @@ return {
     },
     ---@type snacks.picker.Config
     picker = {
+      hidden = true,
       layout = {
         layout = {
           -- Reverse dropdown
