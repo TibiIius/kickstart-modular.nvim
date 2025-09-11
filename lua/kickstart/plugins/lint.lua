@@ -1,5 +1,4 @@
 return {
-
   { -- Linting
     'mfussenegger/nvim-lint',
     event = { 'BufReadPre', 'BufNewFile' },
@@ -7,6 +6,7 @@ return {
       local lint = require 'lint'
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
+        python = { 'mypy' }
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
@@ -57,4 +57,12 @@ return {
       })
     end,
   },
+  {
+    'rshkarin/mason-nvim-lint',
+    dependencies = {
+      'mfussenegger/nvim-lint', 'mason-org/mason.nvim'
+    },
+    -- Call default configure
+    opts = {}
+  }
 }
