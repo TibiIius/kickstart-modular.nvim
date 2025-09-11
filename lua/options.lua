@@ -85,4 +85,7 @@ vim.filetype.add {
   },
 }
 
+-- Local workspace settings
+vim.o.exrc = true
+
 -- vim: ts=2 sts=2 sw=2 et
