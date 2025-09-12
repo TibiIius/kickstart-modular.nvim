@@ -6,16 +6,10 @@ return {
       local lint = require 'lint'
       lint.linters_by_ft = {
         python = { 'mypy' },
-        clojure = { 'clj-kondo' },
         dockerfile = { 'hadolint' },
-        inko = { 'inko' },
-        janet = { 'janet' },
         json = { 'jsonlint' },
-        markdown = { 'vale' },
-        rst = { 'vale' },
-        ruby = { 'ruby' },
+        markdown = { 'markdownlint' },
         terraform = { 'tflint' },
-        text = { 'vale' },
       }
 
       -- Create autocommand which carries out the actual linting
