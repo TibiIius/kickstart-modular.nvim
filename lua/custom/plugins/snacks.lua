@@ -21,6 +21,12 @@ return {
       desc = 'Open buffers',
     },
     {
+      '<leader>sc',
+      function()
+        Snacks.picker.resume()      end,
+      desc = '[S]earch [C]ontinue',
+    },
+    {
       '<leader>sf',
       function()
         Snacks.picker.smart {
