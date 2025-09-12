@@ -196,12 +196,7 @@ return {
         --
         biome = {},
         taplo = {}, -- toml lsp
-        ansiblels = {
-          filetypes = {
-            'yaml.ansible',
-            'yaml',
-          },
-        },
+        ansiblels = {},
         jsonls = {},
         yamlls = {},
         lua_ls = {
