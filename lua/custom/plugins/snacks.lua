@@ -23,7 +23,8 @@ return {
     {
       '<leader>sc',
       function()
-        Snacks.picker.resume()      end,
+        Snacks.picker.resume()
+      end,
       desc = '[S]earch [C]ontinue',
     },
     {
@@ -281,22 +282,6 @@ return {
       desc = '[L]azyGit',
     },
 
-    -- Explorer
-    {
-      '<leader>eo',
-      function()
-        Snacks.explorer.open()
-      end,
-      desc = '[E]xplorer [O]pen',
-    },
-    {
-      '<leader>er',
-      function()
-        Snacks.explorer.reveal()
-      end,
-      desc = '[E]xplorer [R]eveal',
-    },
-
     -- Zen
     {
       '<c-b>',
@@ -381,15 +366,6 @@ return {
         frecency = true, -- frecency bonus
         history_bonus = true, -- give more weight to chronological order
       },
-      sources = {
-        explorer = {
-          hidden = true,
-          ignored = true,
-          layout = {
-            layout = { position = 'right' },
-          },
-        },
-      },
       win = {
         input = {
           keys = {
@@ -400,7 +376,7 @@ return {
     },
     ---@type snacks.explorer.Config
     explorer = {
-      enabled = true,
+      enabled = false,
     },
     ---@type snacks.terminal.Config
     terminal = {

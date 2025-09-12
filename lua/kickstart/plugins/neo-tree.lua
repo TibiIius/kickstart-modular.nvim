@@ -11,7 +11,7 @@ return {
   },
   lazy = false,
   keys = {
-    { '<leader>nt', ':Neotree reveal<CR>', desc = '[N]eo[T]ree', silent = true },
+    { '<leader>en', ':Neotree<CR>', desc = '[E]xplore [N]eoTree', silent = true },
   },
   opts = {
     filesystem = {
