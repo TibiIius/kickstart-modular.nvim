@@ -223,6 +223,8 @@ return {
             'jinja',
           },
         },
+        dockerls = {},
+        docker_compose_language_service = {},
       }
 
       -- Ensure the servers and tools above are installed
