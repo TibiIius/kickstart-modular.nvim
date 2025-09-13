@@ -29,9 +29,14 @@ return {
         signcolumn = 'yes:2',
       },
     },
-    -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
-    -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
     lazy = false,
+
+    config = function(_, opts)
+      require('mini.icons').setup()
+      MiniIcons.mock_nvim_web_devicons()
+
+      require('oil').setup(opts)
+    end,
   },
   {
     'refractalize/oil-git-status.nvim',

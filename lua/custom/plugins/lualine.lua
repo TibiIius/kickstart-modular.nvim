@@ -1,7 +1,12 @@
 return {
   'nvim-lualine/lualine.nvim',
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  dependencies = {
+    'nvim-mini/mini.nvim', -- for icons
+  },
   config = function()
+    require('mini.icons').setup()
+    MiniIcons.mock_nvim_web_devicons()
+
     -- Eviline config as base
     -- Author: shadmansaleh
     -- Credit: glepnir
