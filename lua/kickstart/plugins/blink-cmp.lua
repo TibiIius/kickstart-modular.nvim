@@ -101,6 +101,13 @@ return {
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
           dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink' },
+          path = {
+            opts = {
+              get_cwd = function(_)
+                return vim.fn.getcwd()
+              end,
+            },
+          },
         },
       },
 
