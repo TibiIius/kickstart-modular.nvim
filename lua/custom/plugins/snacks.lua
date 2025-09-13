@@ -299,14 +299,14 @@ return {
 
     -- Scratch
     {
-      '<leader>So',
+      '<leader>Nso',
       function()
         Snacks.scratch()
       end,
       desc = '[S]cratch [O]pen',
     },
     {
-      '<leader>Ss',
+      '<leader>Nss',
       function()
         Snacks.scratch.select()
       end,

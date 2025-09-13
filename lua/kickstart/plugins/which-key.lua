@@ -64,7 +64,7 @@ return {
       spec = {
         { '<leader>s', group = '[S]earch' },
         { '<leader>sl', group = '[S]earch [L]SP' },
-        { '<leader>S', group = '[S]cratch' },
+        { '<leader>S', group = '[S]pectre' },
         { '<leader>t', group = '[T]oggle' },
         { '<leader>g', group = 'Git', mode = { 'n', 'v' } },
         { '<leader>ge', group = '[G]it [E]xplore' },
@@ -74,6 +74,7 @@ return {
         { '<leader>d', group = '[D]AP' },
         { '<leader>ds', group = '[D]AP [S]tep' },
         { '<leader>N', group = '[N]eovim' },
+        { '<leader>Ns', group = '[N]eovim [S]cratch' },
       },
     },
   },
