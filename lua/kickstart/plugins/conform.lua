@@ -38,7 +38,15 @@ return {
         c = { 'clang_format' },
         h = { 'clang_format' },
         -- We run via ruff lsp
-        -- python = { 'black', 'isort', stop_after_first = true },
+        python = {
+          -- To fix auto-fixable lint errors.
+          "ruff_fix",
+          -- To run the Ruff formatter.
+          "ruff_format",
+          -- To organize the imports.
+          "ruff_organize_imports",
+          stop_after_first = false
+        },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         javascript = { 'biome', 'biome-organize-imports', 'prettierd', 'prettier', stop_after_first = true },
