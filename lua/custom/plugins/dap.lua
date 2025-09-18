@@ -3,12 +3,15 @@ return {
     'mfussenegger/nvim-dap',
     dependencies = {
       'Joakker/lua-json5',
+      'mfussenegger/nvim-dap-python',
     },
     config = function()
       local dap = require 'dap'
+      local dap_python = require 'dap-python'
+      dap_python.setup 'uv'
 
       -- launch.json files can have comments etc, so we need json5
-      require('dap.ext.vscode').json_decode = require'json5'.parse
+      require('dap.ext.vscode').json_decode = require('json5').parse
 
       vim.keymap.set('n', '<leader>dt', dap.terminate, { desc = '[D]AP [T]erminate' })
       vim.keymap.set('n', '<leader>dr', dap.restart, { desc = '[D]AP [R]estart' })
