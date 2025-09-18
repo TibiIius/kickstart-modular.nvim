@@ -56,6 +56,22 @@ return {
           enabled = true,
           indent_scope_color = 'pink',
         },
+        mini = {
+          enabled = true,
+        },
+        markdown = true,
+        dap = true,
+        dap_ui = true,
+        dadbod_ui = true,
+        copilot_vim = true,
+        gitsigns = true,
+        lsp_trouble = true,
+        mason = true,
+        neotree = true,
+        native_lsp = {
+          enabled = true,
+        },
+        which_key = true,
       },
     }
 
