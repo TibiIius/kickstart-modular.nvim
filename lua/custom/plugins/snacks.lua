@@ -171,11 +171,14 @@ return {
       desc = '[S]earch [L]SP [T]ype Definitions',
     },
     {
-      '<leader>q',
+      '<leader>lq',
       function()
+        vim.diagnostic.setqflist {
+          open = false,
+        }
         Snacks.picker.qflist()
       end,
-      desc = '[Q]uickfixes',
+      desc = '[L]SP [Q]uickfixes',
     },
 
     -- Terminal
