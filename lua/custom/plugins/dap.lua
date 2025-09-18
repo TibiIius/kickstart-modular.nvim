@@ -1,3 +1,11 @@
+local sign = vim.fn.sign_define
+
+sign('DapBreakpoint', { text = '●', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
+sign('DapBreakpointCondition', { text = '●', texthl = 'DapBreakpointCondition', linehl = 'DapBreakpointCondition', numhl = '' })
+sign('DapLogPoint', { text = '◆', texthl = 'DapLogPoint', linehl = '', numhl = '' })
+sign('DapStopped', { text = '󰜴', texthl = 'DapStopped', linehl = 'DapStopped', numhl = 'DapStopped' })
+sign('DapBreakpointRejected', { text = '', texthl = 'DapBreakpointRejected', linehl = '', numhl = '' })
+
 return {
   {
     'mfussenegger/nvim-dap',
