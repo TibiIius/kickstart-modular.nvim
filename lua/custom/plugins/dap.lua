@@ -57,7 +57,7 @@ return {
 
       dapui.setup()
 
-      vim.keymap.set('n', '<leader>td', dapui.toggle, { desc = '[T]oggle [D]AP' })
+      vim.keymap.set('n', '<leader>tD', dapui.toggle, { desc = '[T]oggle [D]AP' })
       vim.keymap.set('n', '<leader>dp', dapui.eval, { desc = '[D]AP [P]eek (Inline Evaluate)' })
 
       dap.listeners.after.event_initialized['dapui_config'] = function()

@@ -88,6 +88,16 @@ return {
           --  For example, in C this would take you to the header.
           map('<leader>lD', vim.lsp.buf.declaration, 'Goto [D]eclaration')
 
+          map('<leader>tdt', function()
+            local cur = vim.diagnostic.config().virtual_text
+            vim.diagnostic.config { virtual_text = not cur }
+          end, '[T]oggle [D]iagnostics [T]ext')
+
+          map('<leader>tdl', function()
+            local cur = vim.diagnostic.config().virtual_lines
+            vim.diagnostic.config { virtual_lines = not cur }
+          end, '[T]oggle [D]iagnostics [L]ines')
+
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client
           ---@param method vim.lsp.protocol.Method
@@ -157,19 +167,8 @@ return {
             [vim.diagnostic.severity.HINT] = '󰌶 ',
           },
         } or {},
-        virtual_text = {
-          source = 'if_many',
-          spacing = 2,
-          format = function(diagnostic)
-            local diagnostic_message = {
-              [vim.diagnostic.severity.ERROR] = diagnostic.message,
-              [vim.diagnostic.severity.WARN] = diagnostic.message,
-              [vim.diagnostic.severity.INFO] = diagnostic.message,
-              [vim.diagnostic.severity.HINT] = diagnostic.message,
-            }
-            return diagnostic_message[diagnostic.severity]
-          end,
-        },
+        virtual_lines = true,
+        virtual_text = false,
       }
 
       -- Enable the following language servers
