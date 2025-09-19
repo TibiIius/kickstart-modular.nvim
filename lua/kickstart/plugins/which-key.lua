@@ -62,15 +62,17 @@ return {
 
       -- Document existing key chains
       spec = {
+        { '<leader>h', group = '[H]istory' },
         { '<leader>s', group = '[S]earch' },
         { '<leader>sl', group = '[S]earch [L]SP' },
         { '<leader>S', group = '[S]pectre' },
         { '<leader>t', group = '[T]oggle' },
         { '<leader>g', group = 'Git', mode = { 'n', 'v' } },
         { '<leader>ge', group = '[G]it [E]xplore' },
+        { '<leader>gd', group = '[G]it [D]iffview' },
         { '<leader>e', group = '[E]xplorer' },
         { '<leader>j', group = 'Terminal' },
-        { '<leader>l', group = 'LSP' },
+        { '<leader>l', group = '[L]SP' },
         { '<leader>d', group = '[D]AP' },
         { '<leader>ds', group = '[D]AP [S]tep' },
         { '<leader>N', group = '[N]eovim' },
