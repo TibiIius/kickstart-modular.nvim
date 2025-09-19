@@ -64,7 +64,6 @@ return {
         dap_ui = true,
         dadbod_ui = true,
         copilot_vim = true,
-        gitsigns = true,
         lsp_trouble = true,
         mason = true,
         neotree = true,

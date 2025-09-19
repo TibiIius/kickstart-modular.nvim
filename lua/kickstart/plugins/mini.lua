@@ -12,6 +12,13 @@ return {
         desc = '[E]xplore [M]ini',
         silent = true,
       },
+      -- Diff
+      {
+        '<leader>gd',
+        ':lua MiniDiff.toggle_overlay()<CR>',
+        desc = '[G]it [D]iff',
+        silent = true,
+      },
     },
     config = function()
       -- Better Around/Inside textobjects
@@ -182,8 +189,32 @@ return {
         },
       }
 
-      -- comment
+      -- Comment
       require('mini.comment').setup()
+
+      -- Diff
+      require('mini.diff').setup {
+        view = {
+          style = vim.go.number and 'number' or 'sign',
+          signs = {
+            add = '+',
+            change = '~',
+            delete = '-',
+          },
+        },
+      }
+
+      -- Hipatterns
+      local hipatterns = require 'mini.hipatterns'
+      hipatterns.setup {
+        highlighters = {
+          -- Highlight hex color strings (`#rrggbb`) using that color
+          hex_color = hipatterns.gen_highlighter.hex_color(),
+        },
+      }
+
+      -- Extra
+      require('mini.extra').setup()
     end,
   },
 }
