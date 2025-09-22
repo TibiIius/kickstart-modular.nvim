@@ -1,5 +1,7 @@
+local format_on_save_enable = true
+
 return {
-  { -- Autoformat
+  {
     'stevearc/conform.nvim',
     dependencies = {
       'mason-org/mason.nvim',
@@ -15,22 +17,29 @@ return {
         mode = '',
         desc = '[F]ormat buffer',
       },
+      {
+        '<leader>tf',
+        function()
+          format_on_save_enable = not format_on_save_enable
+          if format_on_save_enable then
+            vim.notify('Format on save: Enabled', vim.log.levels.INFO, { title = 'Conform' })
+          else
+            vim.notify('Format on save: Disabled', vim.log.levels.INFO, { title = 'Conform' })
+          end
+        end,
+        desc = '[T]oggle [F]ormat on Save',
+      },
     },
     opts = {
       notify_on_error = false,
-      format_on_save = function(bufnr)
-        -- Disable "format_on_save lsp_fallback" for languages that don't
-        -- have a well standardized coding style. You can add additional
-        -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = false, cpp = false }
-        if disable_filetypes[vim.bo[bufnr].filetype] then
+      format_on_save = function(_)
+        if not format_on_save_enable then
           return nil
-        else
-          return {
-            timeout_ms = 500,
-            lsp_format = 'fallback',
-          }
         end
+        return {
+          timeout_ms = 500,
+          lsp_format = 'fallback',
+        }
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
@@ -40,12 +49,12 @@ return {
         -- We run via ruff lsp
         python = {
           -- To fix auto-fixable lint errors.
-          "ruff_fix",
+          'ruff_fix',
           -- To run the Ruff formatter.
-          "ruff_format",
+          'ruff_format',
           -- To organize the imports.
-          "ruff_organize_imports",
-          stop_after_first = false
+          'ruff_organize_imports',
+          stop_after_first = false,
         },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
