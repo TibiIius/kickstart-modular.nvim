@@ -1,4 +1,4 @@
-local format_on_save_enable = true
+vim.g.format_on_save_enable = true
 
 return {
   {
@@ -20,8 +20,8 @@ return {
       {
         '<leader>tf',
         function()
-          format_on_save_enable = not format_on_save_enable
-          if format_on_save_enable then
+          vim.g.format_on_save_enable = not vim.g.format_on_save_enable
+          if vim.g.format_on_save_enable then
             vim.notify('Format on save: Enabled', vim.log.levels.INFO, { title = 'Conform' })
           else
             vim.notify('Format on save: Disabled', vim.log.levels.INFO, { title = 'Conform' })
