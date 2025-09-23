@@ -69,7 +69,7 @@ return {
         { '<leader>t', group = '[T]oggle' },
         { '<leader>g', group = 'Git', mode = { 'n', 'v' } },
         { '<leader>ge', group = '[G]it [E]xplore' },
-        { '<leader>gd', group = '[G]it [D]iffview' },
+        { '<leader>gD', group = '[G]it [D]iffview' },
         { '<leader>e', group = '[E]xplorer' },
         { '<leader>j', group = 'Terminal' },
         { '<leader>l', group = '[L]SP' },
