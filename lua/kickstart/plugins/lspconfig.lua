@@ -166,8 +166,8 @@ return {
             [vim.diagnostic.severity.HINT] = '󰌶 ',
           },
         } or {},
-        virtual_lines = true,
-        virtual_text = false,
+        virtual_lines = false,
+        virtual_text = true,
       }
 
       -- Enable the following language servers
@@ -180,7 +180,13 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        clangd = {},
+        clangd = {
+          cmd = {
+            "clangd",
+            "--background-index",
+            "--clang-tidy",
+          }
+        },
         gopls = {},
         pyright = {
           -- Using Ruff's import organizer
