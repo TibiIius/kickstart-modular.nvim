@@ -1,5 +1,5 @@
 return {
-  'TibiIius/snacks.nvim',
+  'folke/snacks.nvim',
   branch = 'main',
   priority = 1000,
   lazy = false,
@@ -218,7 +218,7 @@ return {
       function()
         Snacks.terminal.open(nil, {
           -- TODO: Change this accordingly if the ID change ever hits main
-          id = tostring(#Snacks.terminal.list() + 1),
+          count = #Snacks.terminal.list() + 1,
         })
       end,
       desc = 'Create new terminal',
@@ -228,7 +228,7 @@ return {
       '<leader>jf',
       function()
         Snacks.terminal.open(nil, {
-          id = tostring(#Snacks.terminal.list() + 1),
+          count = #Snacks.terminal.list() + 1,
           win = {
             position = 'float',
           },
