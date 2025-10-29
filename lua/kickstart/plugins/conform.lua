@@ -33,7 +33,7 @@ return {
     opts = {
       notify_on_error = false,
       format_on_save = function(_)
-        if not format_on_save_enable then
+        if not vim.g.format_on_save_enable then
           return nil
         end
         return {
