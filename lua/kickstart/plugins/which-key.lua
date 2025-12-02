@@ -65,7 +65,7 @@ return {
         { '<leader>h', group = '[H]istory' },
         { '<leader>s', group = '[S]earch' },
         { '<leader>sl', group = '[S]earch [L]SP' },
-        { '<leader>S', group = '[S]pectre' },
+        { '<leader>S', group = '[S]cooter' },
         { '<leader>t', group = '[T]oggle' },
         { '<leader>g', group = 'Git', mode = { 'n', 'v' } },
         { '<leader>ge', group = '[G]it [E]xplore' },
