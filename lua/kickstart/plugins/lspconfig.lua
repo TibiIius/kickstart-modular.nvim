@@ -28,9 +28,12 @@ return {
       'saghen/blink.cmp',
 
       -- Ensure this is loaded before nvim-lspconfig
-      -- FIXME: Doesn't work with nvim 0.11 and vim.lsp
-      --
-      -- { 'folke/neoconf.nvim', cmd = 'Neoconf', config = true },
+      -- NOTE: Replaces folke/neoconf.nvim
+      {
+        'mrjones2014/codesettings.nvim',
+        opts = {},
+        ft = { 'json', 'jsonc', 'lua' },
+      },
     },
     config = function()
       -- Brief aside: **What is LSP?**
@@ -152,6 +155,13 @@ return {
         end,
       })
 
+      vim.lsp.config('*', {
+        before_init = function(_, config)
+          local codesettings = require 'codesettings'
+          codesettings.with_local_settings(config.name, config)
+        end,
+      })
+
       -- Diagnostic Config
       -- See :help vim.diagnostic.Opts
       vim.diagnostic.config {
@@ -182,10 +192,10 @@ return {
       local servers = {
         clangd = {
           cmd = {
-            "clangd",
-            "--background-index",
-            "--clang-tidy",
-          }
+            'clangd',
+            '--background-index',
+            '--clang-tidy',
+          },
         },
         gopls = {},
         pyright = {
