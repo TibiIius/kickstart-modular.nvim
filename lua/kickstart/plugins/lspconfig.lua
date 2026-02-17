@@ -208,6 +208,11 @@ return {
             ignore = { '*' },
           },
         },
+        blueprint_ls = {
+          filetypes = {
+            "blueprint"
+          }
+        },
         rust_analyzer = {
           settings = {
             ["rust-analyzer"] = {
