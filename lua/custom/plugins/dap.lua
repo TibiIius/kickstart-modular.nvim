@@ -12,11 +12,14 @@ return {
     dependencies = {
       'Joakker/lua-json5',
       'mfussenegger/nvim-dap-python',
+      'leoluz/nvim-dap-go',
     },
     config = function()
       local dap = require 'dap'
       local dap_python = require 'dap-python'
+      local dap_go = require 'dap-go'
       dap_python.setup 'uv'
+      dap_go.setup()
 
       -- launch.json files can have comments etc, so we need json5
       require('dap.ext.vscode').json_decode = require('json5').parse
