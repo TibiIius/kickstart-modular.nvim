@@ -8,23 +8,17 @@ return {
     -- Picker
     {
       '<leader>hu',
-      function()
-        Snacks.picker.undo()
-      end,
+      function() Snacks.picker.undo() end,
       desc = '[H]istory [U]ndo',
     },
     {
       '<leader><leader>',
-      function()
-        Snacks.picker.buffers()
-      end,
+      function() Snacks.picker.buffers() end,
       desc = 'Open buffers',
     },
     {
       '<leader>sc',
-      function()
-        Snacks.picker.resume()
-      end,
+      function() Snacks.picker.resume() end,
       desc = '[S]earch [C]ontinue',
     },
     {
@@ -40,65 +34,47 @@ return {
     },
     {
       '<leader>sg',
-      function()
-        Snacks.picker.grep()
-      end,
+      function() Snacks.picker.grep() end,
       desc = '[S]earch by [G]rep',
     },
     {
       '<leader>gel',
-      function()
-        Snacks.picker.git_log()
-      end,
+      function() Snacks.picker.git_log() end,
       desc = '[G]it [E]xplore [L]og',
     },
     {
       '<leader>geb',
-      function()
-        Snacks.picker.git_branches()
-      end,
+      function() Snacks.picker.git_branches() end,
       desc = '[G]it [E]xplore [B]ranches',
     },
     {
       '<leader>ged',
-      function()
-        Snacks.picker.git_diff()
-      end,
+      function() Snacks.picker.git_diff() end,
       desc = '[G]it [E]xplore [D]iff',
     },
     {
       '<leader>ged',
-      function()
-        Snacks.picker.git_diff()
-      end,
+      function() Snacks.picker.git_diff() end,
       desc = '[G]it [E]xplore [B]ranches',
     },
     {
       '<leader>Nc',
-      function()
-        Snacks.picker.commands()
-      end,
+      function() Snacks.picker.commands() end,
       desc = '[N]eovim [C]ommands',
     },
     {
       '<leader>NC',
-      function()
-        Snacks.picker.colorschemes()
-      end,
+      function() Snacks.picker.colorschemes() end,
       desc = '[N]eovim [C]colorschemes',
     },
     {
       '<leader>Nh',
-      function()
-        Snacks.picker.help()
-      end,
+      function() Snacks.picker.help() end,
       desc = '[N]eovim [H]elp',
     },
     {
       '<leader>Nk',
-      function()
-        Snacks.picker.keymaps()
-      end,
+      function() Snacks.picker.keymaps() end,
       desc = '[N]eovim [K]eymaps',
     },
     {
@@ -123,51 +99,37 @@ return {
     },
     {
       '<leader>sld',
-      function()
-        Snacks.picker.diagnostics()
-      end,
+      function() Snacks.picker.diagnostics() end,
       desc = '[S]earch [L]SP [D]iagnostics',
     },
     {
       '<leader>slr',
-      function()
-        Snacks.picker.lsp_references()
-      end,
+      function() Snacks.picker.lsp_references() end,
       desc = '[S]earch [L]SP [R]eferences',
     },
     {
       '<leader>sli',
-      function()
-        Snacks.picker.lsp_implementations()
-      end,
+      function() Snacks.picker.lsp_implementations() end,
       desc = '[S]earch [L]SP [I]mplementations',
     },
     {
       '<leader>sld',
-      function()
-        Snacks.picker.lsp_definitions()
-      end,
+      function() Snacks.picker.lsp_definitions() end,
       desc = '[S]earch [L]SP [D]efinitions',
     },
     {
       '<leader>sls',
-      function()
-        Snacks.picker.lsp_symbols()
-      end,
+      function() Snacks.picker.lsp_symbols() end,
       desc = '[S]earch [L]SP [S]ymbols',
     },
     {
       '<leader>slS',
-      function()
-        Snacks.picker.lsp_workspace_symbols()
-      end,
+      function() Snacks.picker.lsp_workspace_symbols() end,
       desc = '[S]earch [L]SP Workspace [S]ymbols',
     },
     {
       '<leader>slt',
-      function()
-        Snacks.picker.lsp_type_definitions()
-      end,
+      function() Snacks.picker.lsp_type_definitions() end,
       desc = '[S]earch [L]SP [T]ype Definitions',
     },
     {
@@ -201,13 +163,9 @@ return {
 
         Snacks.picker.select(terms, {
           prompt = 'Select terminal',
-          format_item = function(item)
-            return string.format('Terminal %d', item)
-          end,
+          format_item = function(item) return string.format('Terminal %d', item) end,
         }, function(item)
-          if item == nil then
-            return
-          end
+          if item == nil then return end
           sterms[item]:toggle()
         end)
       end,
@@ -239,9 +197,7 @@ return {
     },
     {
       '<leader>jt',
-      function()
-        Snacks.terminal.toggle()
-      end,
+      function() Snacks.terminal.toggle() end,
       desc = '[T]oggle terminal',
     },
     {
@@ -279,40 +235,30 @@ return {
     -- LazyGit
     {
       '<leader>gl',
-      function()
-        Snacks.lazygit.open()
-      end,
+      function() Snacks.lazygit.open() end,
       desc = '[L]azyGit',
     },
 
     -- Zen
     {
       '<c-b>',
-      function()
-        Snacks.zen()
-      end,
+      function() Snacks.zen() end,
       desc = '[Z]en',
     },
     {
       '<c-s-b>',
-      function()
-        Snacks.zen.zoom()
-      end,
+      function() Snacks.zen.zoom() end,
     },
 
     -- Scratch
     {
       '<leader>Nso',
-      function()
-        Snacks.scratch()
-      end,
+      function() Snacks.scratch() end,
       desc = '[S]cratch [O]pen',
     },
     {
       '<leader>Nss',
-      function()
-        Snacks.scratch.select()
-      end,
+      function() Snacks.scratch.select() end,
       desc = '[S]cratch [S]elect',
     },
   },
@@ -437,12 +383,8 @@ return {
       pattern = 'VeryLazy',
       callback = function()
         -- Setup some globals for debugging (lazy-loaded)
-        _G.dd = function(...)
-          Snacks.debug.inspect(...)
-        end
-        _G.bt = function()
-          Snacks.debug.backtrace()
-        end
+        _G.dd = function(...) Snacks.debug.inspect(...) end
+        _G.bt = function() Snacks.debug.backtrace() end
         vim.print = _G.dd -- Override print to use snacks for `:=` command
       end,
     })
