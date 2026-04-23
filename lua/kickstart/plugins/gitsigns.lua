@@ -29,6 +29,7 @@ return {
       topdelete = { text = '‾' }, ---@diagnostic disable-line: missing-fields
       changedelete = { text = '~' }, ---@diagnostic disable-line: missing-fields
     },
+    current_line_blame = true,
     on_attach = function(bufnr)
       local gitsigns = require 'gitsigns'
 
