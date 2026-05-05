@@ -1,5 +1,6 @@
 return {
   'nvim-lualine/lualine.nvim',
+  version = '*',
   dependencies = {
     'nvim-mini/mini.nvim', -- for icons
   },

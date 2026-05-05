@@ -1,5 +1,6 @@
 return {
   'chrisgrieser/nvim-origami',
+  version = '*',
   event = 'VeryLazy',
   opts = {}, -- needed even when using default config
 

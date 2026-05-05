@@ -1,6 +1,7 @@
 return {
   {
     'stevearc/oil.nvim',
+    version = '*',
     dependencies = {
       -- For mini.icons
       { 'nvim-mini/mini.nvim', opts = {} },
@@ -40,6 +41,7 @@ return {
   },
   {
     'refractalize/oil-git-status.nvim',
+    version = '*',
     dependencies = {
       { 'stevearc/oil.nvim', opts = {} },
     },

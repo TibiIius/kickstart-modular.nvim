@@ -1,6 +1,6 @@
 return {
   'folke/snacks.nvim',
-  branch = 'main',
+  version = '*',
   priority = 1000,
   lazy = false,
   dependencies = { 'folke/noice.nvim' },

@@ -1,5 +1,6 @@
 return {
 	'mrjones2014/codesettings.nvim',
+	version = '*',
 	-- these are the default settings just set `opts = {}` to use defaults
 	opts = {
 		---Look for these config files

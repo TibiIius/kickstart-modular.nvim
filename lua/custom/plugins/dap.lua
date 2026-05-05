@@ -8,6 +8,7 @@ sign('DapBreakpointRejected', { text = '', texthl = 'DapBreakpointRejected', 
 
 return {
   {
+    version = '*',
     'mfussenegger/nvim-dap',
     dependencies = {
       'Joakker/lua-json5',
@@ -54,6 +55,7 @@ return {
   {
     'rcarriga/nvim-dap-ui',
     dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },
+    version = '*',
     config = function()
       local dap = require 'dap'
       local dapui = require 'dapui'

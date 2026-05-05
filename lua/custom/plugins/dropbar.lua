@@ -1,6 +1,7 @@
 return {
   'Bekaboo/dropbar.nvim',
   depdendencies = { 'nvim-mini/mini.nvim' },
+  version = '*',
   config = function()
     require('mini.icons').setup()
     MiniIcons.mock_nvim_web_devicons()
