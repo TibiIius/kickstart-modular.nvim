@@ -1,16 +1,18 @@
-return {
-  "linux-cultist/venv-selector.nvim",
-  version = '*',
-  dependencies = {
-    "neovim/nvim-lspconfig",
-    { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } }, -- optional: you can also use fzf-lua, snacks, mini-pick instead.
-  },
-  ft = "python", -- Load when opening Python files
-  keys = {
-    { "<leader>Nv", "<cmd>VenvSelect<cr>", desc = "Select Python venv" }, -- Open picker on keymap
-  },
-  opts = { -- this can be an empty lua table - just showing below for clarity.
-      search = {}, -- if you add your own searches, they go here.
-      options = {} -- if you add plugin options, they go here.
-  },
+local function gh(repo) return 'https://github.com/' .. repo end
+
+vim.pack.add {
+  { src = gh 'linux-cultist/venv-selector.nvim' },
+  { src = gh 'nvim-telescope/telescope.nvim', branch = '0.1.x' },
+  { src = gh 'nvim-lua/plenary.nvim' },
 }
+
+pcall(function()
+  require('venv-selector').setup {
+    search = {},
+    options = {},
+  }
+end)
+
+vim.keymap.set('n', '<leader>Nv', '<cmd>VenvSelect<cr>', { desc = 'Select Python venv' })
+
+-- vim: ts=2 sts=2 sw=2 et

@@ -1,12 +1,10 @@
-return {
-  'chrisgrieser/nvim-origami',
-  version = '*',
-  event = 'VeryLazy',
-  opts = {}, -- needed even when using default config
+local function gh(repo) return 'https://github.com/' .. repo end
 
-  -- recommended: disable vim's auto-folding
-  init = function()
-    vim.opt.foldlevel = 99
-    vim.opt.foldlevelstart = 99
-  end,
-}
+vim.pack.add { { src = gh 'chrisgrieser/nvim-origami' } }
+
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+
+require('origami').setup {}
+
+-- vim: ts=2 sts=2 sw=2 et
