@@ -43,7 +43,14 @@ vim.keymap.set('n', '<leader>dB', ':DapClearBreakpoints<CR>', { desc = '[D]AP Cl
 
 -- nvim-dap-view
 local dapui = require 'dap-view'
-dapui.setup()
+dapui.setup {
+  winbar = {
+    sections = { 'watches', 'scopes', 'exceptions', 'breakpoints', 'threads', 'repl', 'console' },
+  },
+  virtual_text = {
+    enabled = true,
+  },
+}
 
 vim.keymap.set('n', '<leader>tD', dapui.toggle, { desc = '[T]oggle [D]AP' })
 vim.keymap.set('n', '<leader>dp', dapui.hover, { desc = '[D]AP [P]eek (Inline Evaluate)' })
