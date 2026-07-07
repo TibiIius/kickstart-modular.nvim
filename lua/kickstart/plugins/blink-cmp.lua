@@ -6,7 +6,7 @@ require('luasnip').setup {}
 
 -- [[ Autocomplete Engine ]]
 vim.pack.add { { src = gh 'saghen/blink.lib' } }
-vim.pack.add { { src = gh 'saghen/blink.cmp' } }
+vim.pack.add { { src = gh 'saghen/blink.cmp', version = 'main' } }
 -- v2 requires building the fuzzy matcher before setup
 require('blink.cmp').build():pwait()
 require('blink.cmp').setup {
