@@ -55,9 +55,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     if client and client:supports_method('textDocument/inlayHint', event.buf) then
       vim.lsp.inlay_hint.enable()
-      map('<leader>th', function()
-        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-      end, '[T]oggle Inlay [H]ints')
+      map('<leader>th', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, '[T]oggle Inlay [H]ints')
     end
   end,
 })
@@ -125,8 +123,7 @@ vim.pack.add {
 
 require('mason').setup {}
 
-local ensure_installed = vim.tbl_keys(servers or {})
-require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+require('mason-tool-installer').setup {}
 
 for name, server in pairs(servers) do
   vim.lsp.config(name, server)

@@ -13,7 +13,7 @@ vim.pack.add {
   { src = gh 'Joakker/lua-json5' },
   { src = gh 'mfussenegger/nvim-dap-python' },
   { src = gh 'leoluz/nvim-dap-go' },
-  { src = gh 'rcarriga/nvim-dap-ui' },
+  { src = gh 'igorlfs/nvim-dap-view', version = vim.version.range '1.*' },
   { src = gh 'nvim-neotest/nvim-nio' },
   { src = gh 'jay-babu/mason-nvim-dap.nvim' },
   { src = gh 'lucaSartore/nvim-dap-exception-breakpoints' },
@@ -41,15 +41,12 @@ vim.keymap.set('n', '<leader>dc', ':DapContinue<CR>', { desc = '[D]AP [C]ontinue
 vim.keymap.set('n', '<leader>db', ':DapToggleBreakpoint<CR>', { desc = '[D]AP Toggle [B]reakpoint' })
 vim.keymap.set('n', '<leader>dB', ':DapClearBreakpoints<CR>', { desc = '[D]AP Clear [B]reakpoints' })
 
--- nvim-dap-ui
-local dapui = require 'dapui'
+-- nvim-dap-view
+local dapui = require 'dap-view'
 dapui.setup()
 
 vim.keymap.set('n', '<leader>tD', dapui.toggle, { desc = '[T]oggle [D]AP' })
-vim.keymap.set('n', '<leader>dp', dapui.eval, { desc = '[D]AP [P]eek (Inline Evaluate)' })
-
-dap.listeners.after.event_initialized['dapui_config'] = function() dapui.open() end
-dap.listeners.before.event_terminated['dapui_config'] = function() dapui.close() end
+vim.keymap.set('n', '<leader>dp', dapui.hover, { desc = '[D]AP [P]eek (Inline Evaluate)' })
 
 -- mason-nvim-dap
 require('mason-nvim-dap').setup {
@@ -58,6 +55,6 @@ require('mason-nvim-dap').setup {
 }
 
 -- exception breakpoints
-vim.keymap.set('n', '<leader>de', require('nvim-dap-exception-breakpoints'), { desc = '[D]AP [E]xceptions' })
+vim.keymap.set('n', '<leader>de', require 'nvim-dap-exception-breakpoints', { desc = '[D]AP [E]xceptions' })
 
 -- vim: ts=2 sts=2 sw=2 et

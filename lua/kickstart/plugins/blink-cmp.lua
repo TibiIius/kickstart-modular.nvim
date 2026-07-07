@@ -5,7 +5,10 @@ vim.pack.add { { src = gh 'L3MON4D3/LuaSnip' } }
 require('luasnip').setup {}
 
 -- [[ Autocomplete Engine ]]
+vim.pack.add { { src = gh 'saghen/blink.lib' } }
 vim.pack.add { { src = gh 'saghen/blink.cmp' } }
+-- v2 requires building the fuzzy matcher before setup
+require('blink.cmp').build():pwait()
 require('blink.cmp').setup {
   keymap = {
     preset = 'default',
@@ -23,12 +26,8 @@ require('blink.cmp').setup {
         columns = { { 'kind_icon' }, { 'label', gap = 1 } },
         components = {
           label = {
-            text = function(ctx)
-              return require('colorful-menu').blink_components_text(ctx)
-            end,
-            highlight = function(ctx)
-              return require('colorful-menu').blink_components_highlight(ctx)
-            end,
+            text = function(ctx) return require('colorful-menu').blink_components_text(ctx) end,
+            highlight = function(ctx) return require('colorful-menu').blink_components_highlight(ctx) end,
           },
         },
       },
@@ -44,9 +43,7 @@ require('blink.cmp').setup {
       dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink' },
       path = {
         opts = {
-          get_cwd = function(_)
-            return vim.fn.getcwd()
-          end,
+          get_cwd = function(_) return vim.fn.getcwd() end,
         },
       },
     },
