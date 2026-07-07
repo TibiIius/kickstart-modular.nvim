@@ -83,7 +83,7 @@ local servers = {
     cmd = { 'clangd', '--background-index', '--clang-tidy' },
   },
   gopls = {},
-  pyright = { disableOrganizeImports = true },
+  basedpyright = { disableOrganizeImports = true },
   python = {
     analysis = { ignore = { '*' } },
   },
