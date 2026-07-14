@@ -18,7 +18,7 @@ snacks.setup {
       w = { snacks_main = true },
     },
   },
-  indent = { enabled = true },
+  indent = { enabled = false },
   picker = {
     hidden = true,
     layout = { preset = 'ivy_split' },
@@ -35,8 +35,13 @@ snacks.setup {
   zen = {
     enabled = true,
     toggles = {
-      dim = true, indent = false, git_signs = false, diagnostics = false,
-      line_number = false, relative_number = false, signcolumn = 'no',
+      dim = true,
+      indent = false,
+      git_signs = false,
+      diagnostics = false,
+      line_number = false,
+      relative_number = false,
+      signcolumn = 'no',
     },
     show = { statusline = false, tabline = false },
     zoom = {
@@ -85,31 +90,47 @@ vim.keymap.set('n', '<leader>lq', function()
 end, { desc = '[L]SP [Q]uickfixes' })
 
 -- Terminal keymaps
-vim.keymap.set({ 'n', 't' }, '<c-,>', function()
-  snacks.terminal.open(nil, { count = #snacks.terminal.list() + 1 })
-end, { desc = 'Create new terminal' })
-vim.keymap.set('n', '<leader>jf', function()
-  snacks.terminal.open(nil, { count = #snacks.terminal.list() + 1, win = { position = 'float' }, auto_close = true })
-end, { desc = '[F]loating terminal' })
+vim.keymap.set({ 'n', 't' }, '<c-,>', function() snacks.terminal.open(nil, { count = #snacks.terminal.list() + 1 }) end, { desc = 'Create new terminal' })
+vim.keymap.set(
+  'n',
+  '<leader>jf',
+  function() snacks.terminal.open(nil, { count = #snacks.terminal.list() + 1, win = { position = 'float' }, auto_close = true }) end,
+  { desc = '[F]loating terminal' }
+)
 vim.keymap.set('n', '<leader>jt', function() snacks.terminal.toggle() end, { desc = '[T]oggle terminal' })
 vim.keymap.set({ 'n', 't' }, '<c-;>', function()
   local terms = snacks.terminal.list()
-  if #terms == 0 then snacks.terminal.open(); return end
+  if #terms == 0 then
+    snacks.terminal.open()
+    return
+  end
   local has_visible = false
   for _, term in pairs(terms) do
-    if term:win_valid() then has_visible = true; break end
+    if term:win_valid() then
+      has_visible = true
+      break
+    end
   end
   for _, term in pairs(terms) do
-    if has_visible then term:hide() else term:show() end
+    if has_visible then
+      term:hide()
+    else
+      term:show()
+    end
   end
 end, { desc = 'Toggle all terminals' })
 
 -- Terminal selector
 vim.keymap.set('n', '<leader>js', function()
   local sterms = snacks.terminal.list()
-  if #sterms == 0 then vim.notify('No open terminals', vim.log.levels.WARN); return end
+  if #sterms == 0 then
+    vim.notify('No open terminals', vim.log.levels.WARN)
+    return
+  end
   local terms = {}
-  for k, _ in pairs(sterms) do terms[k] = k end
+  for k, _ in pairs(sterms) do
+    terms[k] = k
+  end
   snacks.picker.select(terms, {
     prompt = 'Select terminal',
     format_item = function(item) return string.format('Terminal %d', item) end,

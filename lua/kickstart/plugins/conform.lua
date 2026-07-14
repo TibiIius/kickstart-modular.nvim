@@ -8,9 +8,9 @@ vim.g.format_on_save_enable = true
 require('conform').setup {
   notify_on_error = false,
   format_on_save = function(_)
-    if not vim.g.format_on_save_enable then
-      return nil
-    end
+    if not vim.g.format_on_save_enable then return nil end
+    local trailspace = require 'mini.trailspace'
+    trailspace.trim()
     return {
       timeout_ms = 500,
       lsp_format = 'fallback',
@@ -43,9 +43,7 @@ require('conform').setup {
   },
 }
 
-vim.keymap.set('n', '<leader>f', function()
-  require('conform').format { async = true, lsp_format = 'fallback' }
-end, { desc = '[F]ormat buffer' })
+vim.keymap.set('n', '<leader>f', function() require('conform').format { async = true, lsp_format = 'fallback' } end, { desc = '[F]ormat buffer' })
 
 vim.keymap.set('n', '<leader>tf', function()
   vim.g.format_on_save_enable = not vim.g.format_on_save_enable

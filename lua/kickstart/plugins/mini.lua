@@ -21,6 +21,9 @@ require('mini.ai').setup {
 -- Add/delete/replace surroundings
 require('mini.surround').setup()
 
+-- Remove trailing space
+require('mini.trailspace').setup()
+
 -- Files
 require('mini.files').setup {
   options = {
