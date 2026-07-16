@@ -77,6 +77,18 @@ vim.diagnostic.config {
   virtual_text = true,
 }
 
+-- TypeScript 7+ (native Go port) ships its own LSP (`tsc --lsp`) and no longer
+-- provides the JS tsserver that typescript-language-server (ts_ls) needs.
+-- Detect which one the project root uses and only attach the matching server.
+local function has_native_ts(root)
+  return vim.uv.fs_stat(vim.fs.joinpath(root, 'node_modules', 'typescript', 'lib', 'getExePath.js')) ~= nil
+end
+
+-- Reuse nvim-lspconfig's default root detection (incl. deno exclusion)
+local function default_root_dir(name)
+  return dofile(vim.api.nvim_get_runtime_file('lsp/' .. name .. '.lua', false)[1]).root_dir
+end
+
 -- LSP servers
 local servers = {
   clangd = {
@@ -96,7 +108,36 @@ local servers = {
       },
     },
   },
-  ts_ls = {},
+  -- TypeScript <=5 projects (JS-based tsserver)
+  ts_ls = {
+    root_dir = function(bufnr, on_dir)
+      default_root_dir 'ts_ls'(bufnr, function(root)
+        if not has_native_ts(root) then on_dir(root) end
+      end)
+    end,
+  },
+  -- TypeScript 7+ projects (built-in native LSP; binary was renamed tsgo -> tsc)
+  tsgo = {
+    cmd = function(dispatchers, config)
+      local cmd = 'tsgo'
+      local root = (config or {}).root_dir
+      if root then
+        for _, bin in ipairs { 'tsc', 'tsgo' } do
+          local local_cmd = vim.fs.joinpath(root, 'node_modules', '.bin', bin)
+          if vim.fn.executable(local_cmd) == 1 then
+            cmd = local_cmd
+            break
+          end
+        end
+      end
+      return vim.lsp.rpc.start({ cmd, '--lsp', '--stdio' }, dispatchers)
+    end,
+    root_dir = function(bufnr, on_dir)
+      default_root_dir 'tsgo'(bufnr, function(root)
+        if has_native_ts(root) then on_dir(root) end
+      end)
+    end,
+  },
   biome = {},
   taplo = {},
   ansiblels = {},
