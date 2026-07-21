@@ -137,6 +137,7 @@ local servers = {
   biome = {},
   tombi = {},
   ansiblels = {},
+  jdtls = {},
   jsonls = {},
   yamlls = {},
   lua_ls = {
