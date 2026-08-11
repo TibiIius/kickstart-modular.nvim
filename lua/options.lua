@@ -93,7 +93,7 @@ vim.o.exrc = true
 
 -- Neovide
 if vim.g.neovide then
-  vim.o.guifont = 'Liga SFMono Nerd Font:h13'
+  vim.o.guifont = 'Liga SFMono Nerd Font:h15'
   vim.opt.linespace = 3
   vim.g.neovide_theme = 'auto'
 end

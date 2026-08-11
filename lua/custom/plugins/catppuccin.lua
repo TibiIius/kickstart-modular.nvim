@@ -2,11 +2,13 @@ local function gh(repo) return 'https://github.com/' .. repo end
 
 vim.pack.add { { src = gh 'catppuccin/nvim', name = 'catppuccin' } }
 
+local wants_transparent = not vim.g.neovide
+
 require('catppuccin').setup {
   flavour = 'auto',
   background = { light = 'latte', dark = 'macchiato' },
-  transparent_background = true,
-  float = { transparent = true, solid = false },
+  transparent_background = wants_transparent,
+  float = { transparent = wants_transparent, solid = false },
   show_end_of_buffer = false,
   term_colors = true,
   dim_inactive = { enabled = true, shade = 'dark', percentage = 0.15 },
