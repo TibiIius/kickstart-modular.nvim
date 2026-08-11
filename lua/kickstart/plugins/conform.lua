@@ -18,6 +18,7 @@ require('conform').setup {
   end,
   formatters_by_ft = {
     lua = { 'stylua' },
+    rust = { 'topcoat', 'rustfmt', lsp_format = 'first' },
     cpp = { 'clang_format' },
     c = { 'clang_format' },
     h = { 'clang_format' },
@@ -39,6 +40,12 @@ require('conform').setup {
   formatters = {
     clang_format = {
       args = { '-style=file:.clang-format', '-assume-filename', '$FILENAME' },
+    },
+    topcoat = {
+      command = 'topcoat',
+      args = { 'fmt', '--stdin' },
+      require_cwd = true,
+      cwd = function(self, ctx) return require('conform.util').root_file { 'Topcoat.toml' }(self, ctx) end,
     },
   },
 }
