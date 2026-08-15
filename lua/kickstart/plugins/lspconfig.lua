@@ -135,6 +135,7 @@ local servers = {
     end,
   },
   biome = {},
+  svelte = {},
   tombi = {},
   ansiblels = {},
   jdtls = {},
