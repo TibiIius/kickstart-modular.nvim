@@ -135,7 +135,13 @@ local servers = {
     end,
   },
   biome = {},
-  svelte = {},
+  svelte = {
+    capabilities = function(caps)
+      caps.textDocument.formatting = nil
+      caps.textDocument.rangeFormatting = nil
+      return caps
+    end,
+  },
   tombi = {},
   ansiblels = {},
   jdtls = {},
