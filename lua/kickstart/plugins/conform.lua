@@ -41,6 +41,9 @@ require('conform').setup {
     clang_format = {
       args = { '-style=file:.clang-format', '-assume-filename', '$FILENAME' },
     },
+    biome = {
+      formatWithErrors = true,
+    },
     topcoat = {
       command = 'topcoat',
       args = { 'fmt', '--stdin' },
