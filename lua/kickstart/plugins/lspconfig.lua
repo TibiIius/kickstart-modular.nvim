@@ -85,16 +85,24 @@ local function has_native_ts(root) return vim.uv.fs_stat(vim.fs.joinpath(root, '
 -- Reuse nvim-lspconfig's default root detection (incl. deno exclusion)
 local function default_root_dir(name) return dofile(vim.api.nvim_get_runtime_file('lsp/' .. name .. '.lua', false)[1]).root_dir end
 
+-- cmake-language-server 0.1.11 is not compatible with pygls 2.x.
+local function fix_cmake_language_server()
+  local python = vim.fs.joinpath(vim.fn.stdpath 'data', 'mason', 'packages', 'cmake-language-server', 'venv', 'bin', 'python')
+  if vim.fn.executable(python) ~= 1 then return end
+
+  local compatible =
+    vim.system({ python, '-c', [[import importlib.metadata as m; raise SystemExit(0 if m.version('pygls').split('.')[0] == '1' else 1)]] }):wait()
+  if compatible.code ~= 0 then vim.system({ python, '-m', 'pip', 'install', '--quiet', '--disable-pip-version-check', 'pygls==1.3.1' }):wait() end
+end
+
 -- LSP servers
 local servers = {
   clangd = {
     cmd = { 'clangd', '--background-index', '--clang-tidy' },
   },
   gopls = {},
+  cmake = {},
   basedpyright = { disableOrganizeImports = true },
-  python = {
-    analysis = { ignore = { '*' } },
-  },
   rust_analyzer = {
     settings = {
       ['rust-analyzer'] = {
@@ -169,6 +177,8 @@ vim.pack.add {
 require('mason').setup {}
 
 require('mason-tool-installer').setup {}
+
+fix_cmake_language_server()
 
 for name, server in pairs(servers) do
   vim.lsp.config(name, server)
