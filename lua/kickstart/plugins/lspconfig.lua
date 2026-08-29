@@ -152,6 +152,8 @@ local servers = {
   },
   tombi = {},
   ansiblels = {},
+  terraformls = {},
+  shuck = {},
   jdtls = {},
   jsonls = {},
   yamlls = {},
