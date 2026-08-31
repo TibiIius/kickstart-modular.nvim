@@ -84,6 +84,32 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
+-- AI slop but works
+-- [[ Deduplicate the runtimepath and packpath ]]
+-- `/home` is a symlink to `var/home`, so Neovim lists the same physical
+-- directories under two spellings (`/home/blub` and `/var/home/blub`) in both
+-- 'runtimepath' and 'packpath'. Plugins are therefore added twice, which breaks
+-- plugins that resolve a native library across the runtimepath (e.g. blink.cmp's
+-- fuzzy library). Collapse entries that resolve to the same real path before
+-- anything is loaded, so each directory appears once with a consistent spelling.
+local function dedupe_option(option)
+  local seen = {}
+  local entries = {}
+  for entry in vim.gsplit(vim.o[option], ',', true) do
+    local absolute = vim.fn.fnamemodify(entry, ':p')
+    local ok, resolved = pcall(vim.uv.fs_realpath, absolute)
+    local value = (ok and resolved) or absolute
+    local key = (ok and resolved) and ('real:' .. resolved) or ('abs:' .. absolute)
+    if not seen[key] then
+      seen[key] = true
+      table.insert(entries, value)
+    end
+  end
+  vim.o[option] = table.concat(entries, ',')
+end
+dedupe_option 'runtimepath'
+dedupe_option 'packpath'
+
 -- [[ Setting options ]]
 require 'options'
 
