@@ -21,7 +21,7 @@ snacks.setup {
   indent = { enabled = false },
   picker = {
     hidden = true,
-    layout = { preset = 'ivy_split' },
+    layout = { preset = 'vertical' },
     matcher = { frecency = true, history_bonus = true },
     win = {
       input = {
