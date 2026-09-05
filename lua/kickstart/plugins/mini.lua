@@ -140,6 +140,7 @@ mstarter.setup {
     { name = 'Open Folder', action = function() require('snacks').picker.zoxide() end, section = 'Actions' },
     { name = 'New File', action = ':enew', section = 'Actions' },
     { name = 'Mason', action = ':Mason', section = 'Actions' },
+    { name = 'Pack Update', action = function() vim.pack.update() end, section = 'Actions' },
     { name = 'Quit', action = ':qa!', section = 'Actions' },
   },
   content_hooks = {
