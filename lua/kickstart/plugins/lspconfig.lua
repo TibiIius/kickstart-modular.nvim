@@ -167,6 +167,7 @@ local servers = {
   jinja_lsp = { filetypes = { 'jinja' } },
   dockerls = {},
   docker_compose_language_service = {},
+  qmlls = {},
 }
 
 vim.pack.add {
